@@ -1,0 +1,34 @@
+# ===== Secrets (always) =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ===== OS (always) =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Editors (always) =====
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+
+# ===== Claude Code (always) =====
+.claude/settings.local.json
+
+# ===== Node =====
+node_modules/
+dist/
+*.tsbuildinfo
+npm-debug.log*
+
+# ===== Raw data downloads (update-data cache) =====
+.cache/
+
+# ===== Logs =====
+*.log
+logs/
