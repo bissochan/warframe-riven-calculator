@@ -1,4 +1,5 @@
 import { analyzeWeapon, getOverride } from '../core/evaluate';
+import { Heading } from './Heading';
 import { REFERENCE_BUILDS } from '../core/dps';
 import { formatValue, magnitude } from '../core/riven';
 import { getStat } from '../core/stats';
@@ -13,7 +14,7 @@ export function WeaponInsights({ weapon, disposition }: { weapon: Weapon; dispos
 
   return (
     <section className="card">
-      <h2>Best stats for {weapon.name}</h2>
+      <Heading label="best-stats">Best stats for {weapon.name}</Heading>
       <p className="muted small">
         Gain of each stat alone at max roll on a 3+1 riven, on top of the reference build ({REFERENCE_BUILDS[weapon.statClass].label}).
       </p>
@@ -50,7 +51,7 @@ export function WeaponInsights({ weapon, disposition }: { weapon: Weapon; dispos
         ))}
         {godroll.curse && <span className="chip bad">{getStat(godroll.curse).label}</span>}
       </p>
-      {ov?.note && <p className="note">💬 {ov.note}</p>}
+      {ov?.note && <p className="note">{ov.note}</p>}
       {ov?.preferred && (
         <p className="muted small">
           Community picks: {ov.preferred.map((id) => getStat(id).label).join(', ')}

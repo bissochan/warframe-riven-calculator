@@ -29,3 +29,6 @@ Static web app (English UI) to grade Warframe riven mods, find the best stats pe
 ## Open / later
 - Verify: configuration odds (25% each), uniform roll distribution, whether a locked trait keeps its value, kitgun riven value column (pistol assumed).
 - Custom build input, OCR, warframe.market prices, companion weapon rivens.
+
+## Visual style (17/10/2026)
+The UI follows the personal site's design system (`personal-site/src/styles/global.css`): shadcn neutral oklch tokens, emerald brand accent, Geist + Geist Mono (self-hosted), `~/riven-calculator` mono header, `// label` section eyebrows, light/dark via `.dark` + localStorage `theme` (shared with the personal site on bissochan.github.io), lucide-style SVG icons instead of emoji. Plain CSS port in `src/ui/styles.css`; keep tokens in sync with the personal site.

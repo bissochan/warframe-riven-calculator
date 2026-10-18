@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { Heading } from './Heading';
 import { analyzeWeapon } from '../core/evaluate';
 import { estimateKuva, successChance, type MonteCarloResult, type Target } from '../core/probability';
 import { statPool } from '../core/riven';
@@ -73,7 +74,7 @@ export function TargetPlanner({ riven, weapon }: { riven: Riven; weapon: Weapon 
 
   return (
     <section className="card">
-      <h2>Kuva planner</h2>
+      <Heading label="plan">Kuva planner</Heading>
       <p className="muted small">Click a stat to cycle: required → acceptable → ignored. Required stats must all appear; the other slots may only hold acceptable stats.</p>
       <div className="chips">
         {buffs.map((s) => (

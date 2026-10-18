@@ -11,6 +11,8 @@ import { emptyState, fromRiven, load, save, toRiven, type Saved } from './ui/sta
 import { TargetPlanner } from './ui/TargetPlanner';
 import { WeaponInsights } from './ui/WeaponInsights';
 import { WeaponPicker } from './ui/WeaponPicker';
+import { Heading } from './ui/Heading';
+import { ThemeToggle } from './ui/ThemeToggle';
 
 type Tab = 'evaluate' | 'simulate' | 'plan';
 
@@ -36,20 +38,37 @@ export default function App() {
   };
 
   return (
-    <div className="app">
-      <header className="top">
-        <div>
-          <h1>
-            <span className="logo">◆</span> Riven Calculator
-          </h1>
-          <p className="muted small">Grade rivens against every possible roll of the weapon, see the best stats, simulate cycling, locking and splicing.</p>
+    <>
+      <header className="site-header">
+        <div className="container header-inner">
+          <a href="./" className="brand-link" aria-label="Riven Calculator — home">
+            <span className="brand">~/</span>riven-calculator
+          </a>
+          <nav aria-label="Main" className="header-nav">
+            <a href="https://bissochan.github.io/projects/warframe-riven-calculator/" className="nav-link">
+              About
+            </a>
+            <a href="https://github.com/bissochan/warframe-riven-calculator" className="nav-link">
+              GitHub
+            </a>
+          </nav>
+          <ThemeToggle />
         </div>
       </header>
 
-      <main className="layout">
+      <div className="container app">
+      <section className="hero" aria-labelledby="hero-title">
+        <p className="prompt">
+          <span className="brand">~/riven-calculator</span> $ ./grade --riven
+        </p>
+        <h1 id="hero-title">Riven Calculator</h1>
+        <p className="lead">Grade rivens against every roll their weapon can have, see the best stats per weapon, and simulate cycling, trait locking and splicing.</p>
+      </section>
+
+      <main id="main" className="layout">
         <div className="col-left">
           <section className="card">
-            <h2>Your riven</h2>
+            <Heading label="riven">Your riven</Heading>
             <WeaponPicker weapon={weapon} onPick={(w) => setState(state.weapon ? { ...state, weapon: w.name, rows: state.rows.map((r) => ({ ...r, id: '' })) } : emptyState(w.name))} />
             {weapon && <RivenEditor state={state} weapon={weapon} onChange={updateState} />}
             {weapon && (
@@ -66,7 +85,7 @@ export default function App() {
 
           {saved.history.length > 0 && (
             <section className="card">
-              <h2>Saved rivens</h2>
+              <Heading label="saved">Saved rivens</Heading>
               <ul className="history">
                 {saved.history.map((h) => (
                   <li key={h.name}>
@@ -89,7 +108,7 @@ export default function App() {
         <div className="col-right">
           {!weapon && (
             <section className="card empty">
-              <h2>Start with a weapon</h2>
+              <Heading label="start">Start with a weapon</Heading>
               <p className="muted">Pick the riven's weapon, then enter its stats as shown in game. Grades, score and the best stats for the weapon appear here.</p>
             </section>
           )}
@@ -119,7 +138,10 @@ export default function App() {
         </div>
       </main>
 
-      <footer className="foot small muted">
+      </div>
+
+      <footer className="site-footer">
+        <div className="container foot">
         <details>
           <summary>Assumptions & sources</summary>
           <ul>
@@ -134,8 +156,12 @@ export default function App() {
             </li>
           </ul>
         </details>
-        <p>Fan-made tool, not affiliated with Digital Extremes. Warframe is a trademark of Digital Extremes Ltd.</p>
+        <p className="mono-note">No cookies, no tracking. Fan-made tool, not affiliated with Digital Extremes. Warframe is a trademark of Digital Extremes Ltd.</p>
+        <p>
+          © {new Date().getFullYear()} <a href="https://bissochan.github.io/">Luca Bissoli</a>
+        </p>
+        </div>
       </footer>
-    </div>
+    </>
   );
 }

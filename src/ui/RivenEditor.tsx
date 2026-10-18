@@ -1,4 +1,5 @@
 import { enterableStats } from '../core/riven';
+import { LockIcon, UnlockIcon } from './icons';
 import { getStat } from '../core/stats';
 import type { StatKind, Weapon } from '../core/types';
 import type { EditorState, Row } from './state';
@@ -69,7 +70,7 @@ export function RivenEditor({ state, weapon, onChange }: { state: EditorState; w
                 onClick={() => set((s) => ({ locked: s.locked === row.id ? '' : row.id }))}
                 aria-label="Toggle trait lock"
               >
-                {state.locked && state.locked === row.id ? '🔒' : '🔓'}
+                {state.locked && state.locked === row.id ? <LockIcon /> : <UnlockIcon />}
               </button>
               <button className="icon-btn" title="Remove stat" onClick={() => set((s) => ({ rows: s.rows.filter((_, j) => j !== i) }))} disabled={state.rows.length <= 2} aria-label="Remove stat">
                 ✕

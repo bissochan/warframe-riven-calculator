@@ -1,4 +1,5 @@
 import type { Evaluation as Eval } from '../core/evaluate';
+import { InfoIcon, LockIcon } from './icons';
 import { formatValue, rivenName, statReport, type Grade, type StatReport } from '../core/riven';
 import type { Riven, Weapon } from '../core/types';
 
@@ -82,10 +83,10 @@ export function Evaluation({ riven, weapon, evaluation }: { riven: Riven; weapon
               <td>
                 <span className={`kind-dot ${r.stat.kind}`} />
                 {r.def.label}
-                {riven.locked === r.stat.id && ' 🔒'}
+                {riven.locked === r.stat.id && <span className="muted"> <LockIcon /></span>}
                 {r.outOfRange && (
                   <span className="warn" title="Value outside the possible range: check rank, disposition or the number entered">
-                    {' '}⚠
+                    {' '}<InfoIcon />
                   </span>
                 )}
               </td>

@@ -1,4 +1,6 @@
 import { useMemo, useState } from 'react';
+import { LockIcon } from './icons';
+import { Heading } from './Heading';
 import { availableRecipes, cycle, mulberry32, splice, unsplice } from '../core/cycle';
 import { evaluate } from '../core/evaluate';
 import { cycleCost } from '../core/mechanics';
@@ -15,7 +17,7 @@ function StatList({ riven, weapon }: { riven: Riven; weapon: Weapon }) {
         <li key={s.id} className={s.kind}>
           <span className="mono">{formatValue(s.id, signedValue(s, config, weapon, disp))}</span> {getStat(s.id).label}
           {s.kind === 'spliced' && <span className="tag small">spliced</span>}
-          {riven.locked === s.id && ' 🔒'}
+          {riven.locked === s.id && <span className="muted"> <LockIcon /></span>}
         </li>
       ))}
     </ul>
@@ -55,7 +57,7 @@ export function Simulator({ riven, weapon, onApply }: Props) {
 
   return (
     <section className="card">
-      <h2>Cycle simulator</h2>
+      <Heading label="simulate">Cycle simulator</Heading>
       <p className="muted small">
         Next cycle: <strong>{nextCost.toLocaleString('en-US')} kuva</strong>
         {riven.locked && ` (×2 for the ${getStat(riven.locked).label} lock)`}
